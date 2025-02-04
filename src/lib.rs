@@ -134,6 +134,7 @@ where
             let raw_data = self.i2c.get_field_data()?;
             match MeasurmentData::from_raw(raw_data, &self.calibration_data, &self.variant) {
                 Some(data) => {
+                    self.i2c.set_mode(SensorMode::Sleep)?; // Putting into sleep mode after reading
                     // update the current ambient temperature which is needed to calculate the target heater temp
                     self.i2c.ambient_temperature = data.temperature as i32;
                     return Ok(data);
