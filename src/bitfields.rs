@@ -48,6 +48,9 @@ impl RawConfig<[u8; 5]> {
             // Sequential mode is not implemented and only available in bme688
             self.set_heater_profile(HeaterProfile::Profile0);
         }
+        else {
+            self.set_run_gas(false);
+        }
     }
     
 }
